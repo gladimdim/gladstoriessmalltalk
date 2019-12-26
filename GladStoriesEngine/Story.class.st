@@ -23,11 +23,6 @@ Story >> authors: anObject [
 	authors := anObject
 ]
 
-{ #category : #testing }
-Story >> canContinue [
-^ currentPage hasNextNode
-]
-
 { #category : #accessing }
 Story >> currentPage [
 	^ currentPage

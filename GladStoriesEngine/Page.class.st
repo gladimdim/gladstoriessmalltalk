@@ -10,6 +10,28 @@ Class {
 	#category : #GladStoriesEngine
 }
 
+{ #category : #adding }
+Page >> addNodeWithText: aObject [
+| n |
+n := PageNode new text: aObject.
+nodes add: n
+]
+
+{ #category : #adding }
+Page >> addNodeWithText: aText andImageType: aImageType [
+| n |
+
+n := PageNode withText: aText.
+n imageType: aImageType.
+
+self nodes add: n
+]
+
+{ #category : #testing }
+Page >> canContinue [
+^ nodes size > currentIndex
+]
+
 { #category : #accessing }
 Page >> currentIndex [ 
 ^ currentIndex
@@ -20,9 +42,14 @@ Page >> currentIndex: anObject [
 	currentIndex := anObject
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 Page >> currentNode [
 ^ nodes at: currentIndex
+]
+
+{ #category : #processing }
+Page >> doContinue [
+currentIndex := currentIndex + 1
 ]
 
 { #category : #accessing }
@@ -35,15 +62,10 @@ Page >> endType: anObject [
 	endType := anObject
 ]
 
-{ #category : #testing }
-Page >> hasNextNode [
-^ nodes size > currentIndex
-]
-
 { #category : #initialization }
 Page >> initialize [ 
-nodes := Array new.
-next := Array new.
+nodes := OrderedCollection new.
+next := OrderedCollection new.
 currentIndex := 1
 ]
 
