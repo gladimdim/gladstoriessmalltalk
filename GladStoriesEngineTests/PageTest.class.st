@@ -5,6 +5,18 @@ Class {
 }
 
 { #category : #tests }
+PageTest >> testAddNextPageWithText [
+| n np |
+np := Page new.
+n := Page new.
+n  addNextPage: n withText: 'test1'.
+
+
+self assert: n next size equals: 1.
+self assert: (n next at: 1) text equals: 'test1'
+]
+
+{ #category : #tests }
 PageTest >> testAddNodeWithText [
 | p |
 
@@ -90,7 +102,7 @@ self assert: p nextOptionsText size equals: 3.
 self assert: (p nextOptionsText at: 3) equals: 'test3'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 PageTest >> testNextPageWithText [
 | p |
 
