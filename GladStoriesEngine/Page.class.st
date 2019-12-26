@@ -11,6 +11,15 @@ Class {
 }
 
 { #category : #adding }
+Page >> addNextPage: aPage withText: aText [
+| nextPage |
+nextPage := PageNext new.
+nextPage text: aText.
+nextPage nextPage: aPage.
+next add: nextPage
+]
+
+{ #category : #adding }
 Page >> addNodeWithText: aObject [
 | n |
 n := PageNode new text: aObject.
@@ -77,6 +86,12 @@ Page >> next [
 { #category : #accessing }
 Page >> next: anObject [
 	next := anObject
+]
+
+{ #category : #processing }
+Page >> nextOptionsText [
+
+^ next collect: [ :n | n text ].
 ]
 
 { #category : #accessing }

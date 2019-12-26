@@ -77,3 +77,27 @@ c := Page new.
 self assert: c currentIndex equals: 1.
 self assert: c nodes size equals: 0.
 ]
+
+{ #category : #tests }
+PageTest >> testNextOptionsText [
+| p |
+p := Page new.
+p addNextPage: Page new withText: 'test1'.
+p addNextPage: Page new withText: 'test2'.
+p addNextPage: Page new withText: 'test3'.
+
+self assert: p nextOptionsText size equals: 3.
+self assert: (p nextOptionsText at: 3) equals: 'test3'
+]
+
+{ #category : #'as yet unclassified' }
+PageTest >> testNextPageWithText [
+| p |
+
+p := Page new.
+p addNextPage: Page new withText: 'Option 1'.
+p addNextPage: Page new withText: 'Option 2'.
+
+self assert: p next size equals: 2
+
+]
