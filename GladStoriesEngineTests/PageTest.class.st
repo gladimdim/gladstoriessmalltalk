@@ -9,7 +9,7 @@ PageTest >> testAddNextPageWithText [
 | n np |
 np := Page new.
 n := Page new.
-n  addNextPage: n withText: 'test1'.
+n addNextPage: np withText: 'test1'.
 
 
 self assert: n next size equals: 1.
