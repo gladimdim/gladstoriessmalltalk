@@ -56,6 +56,12 @@ Page >> currentNode [
 ^ nodes at: currentIndex
 ]
 
+{ #category : #'accessing-dynamic' }
+Page >> currentText [
+
+^ (nodes at: currentIndex) text
+]
+
 { #category : #processing }
 Page >> doContinue [
 currentIndex := currentIndex + 1
