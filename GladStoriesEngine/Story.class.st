@@ -13,6 +13,17 @@ Class {
 	#category : #GladStoriesEngine
 }
 
+{ #category : #'instance creation' }
+Story class >> fromJsonString: aObject [
+"Initializes Story from JSON String"
+| map |
+
+map := NeoJSONReader fromString: aObject.
+
+^ Story new title: (map at: 'title') description: (map at: 'description') authors: (map at: 'authors').
+
+]
+
 { #category : #accessing }
 Story >> authors [ 
 ^ authors
