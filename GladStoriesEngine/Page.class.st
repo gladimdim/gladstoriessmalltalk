@@ -10,6 +10,19 @@ Class {
 	#category : #GladStoriesEngine
 }
 
+{ #category : #'instance creation' }
+Page class >> fromMap: aMap [
+"Initializes Page from the Dictionary"
+| mNext mNodes page |
+mNext := (aMap at: 'next') collect: [ :el | PageNext fromMap: el ].
+mNodes := (aMap at: 'nodes') collect: [ :el | PageNode fromMap: el ].
+page := self new.
+page endType: (aMap at: 'endType').
+page next: mNext.
+page nodes: mNodes.
+^ page
+]
+
 { #category : #adding }
 Page >> addNextPage: aPage withText: aText [
 | nextPage |

@@ -8,6 +8,11 @@ Class {
 	#category : #GladStoriesEngine
 }
 
+{ #category : #'instance creation' }
+PageNode class >> fromMap: aMap [
+^ self new text: (aMap at: 'text'); imageType: (aMap at: 'imageType')
+]
+
 { #category : #initialization }
 PageNode class >> withText: aString [
 "Initializes the Node object with aString as text"

@@ -20,7 +20,11 @@ Story class >> fromJsonString: aObject [
 
 map := NeoJSONReader fromString: aObject.
 
-^ Story new title: (map at: 'title') description: (map at: 'description') authors: (map at: 'authors').
+^ self new
+	title: (map at: 'title')
+	description: (map at: 'description')
+	authors: (map at: 'authors');
+	root: (Page fromMap: (map at: 'root'))
 
 ]
 
