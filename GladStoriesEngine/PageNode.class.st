@@ -10,7 +10,7 @@ Class {
 
 { #category : #'instance creation' }
 PageNode class >> fromMap: aMap [
-^ self new text: (aMap at: 'text'); imageType: (aMap at: 'imageType')
+^ self new text: (aMap at: 'text'); imageType: (aMap at: 'imageType' ifAbsent: [nil])
 ]
 
 { #category : #initialization }

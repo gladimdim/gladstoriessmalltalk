@@ -17,7 +17,7 @@ Page class >> fromMap: aMap [
 mNext := (aMap at: 'next') collect: [ :el | PageNext fromMap: el ].
 mNodes := (aMap at: 'nodes') collect: [ :el | PageNode fromMap: el ].
 page := self new.
-page endType: (aMap at: 'endType').
+page endType: (aMap at: 'endType' ifAbsent: [nil]).
 page next: mNext.
 page nodes: mNodes.
 ^ page
