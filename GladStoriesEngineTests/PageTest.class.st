@@ -100,6 +100,12 @@ self assert: c endType equals: nil.
 ]
 
 { #category : #tests }
+PageTest >> testEndType [
+
+self assert: (Page new endType: 'DEAD') endType equals: 'DEAD'
+]
+
+{ #category : #tests }
 PageTest >> testFromMap [
 | m node |
 
@@ -133,6 +139,18 @@ self assert: c nodes size equals: 0.
 ]
 
 { #category : #tests }
+PageTest >> testNext [ 
+| p |
+
+p := Page new.
+p addNextPage: Page new withText: 'test1'.
+
+p addNextPage: Page new withText: 'test2'.
+
+self assert: p next size equals: 2.
+]
+
+{ #category : #tests }
 PageTest >> testNextOptionsText [
 | p |
 p := Page new.
@@ -154,4 +172,15 @@ p addNextPage: Page new withText: 'Option 2'.
 
 self assert: p next size equals: 2
 
+]
+
+{ #category : #tests }
+PageTest >> testNodes [
+|p|
+
+p := Page new.
+p addNodeWithText: 'Test1'.
+p addNodeWithText: 'Test2'.
+
+self assert: p nodes size equals: 2
 ]

@@ -2,10 +2,9 @@ Class {
 	#name : #MainViewPresenter,
 	#superclass : #SpPresenter,
 	#instVars : [
-		'buttonHappy',
-		'buttonNeutral',
-		'buttonBad',
-		'screen'
+		'buttonContinue',
+		'screen',
+		'story'
 	],
 	#category : #GladStoriesRuntime
 }
@@ -16,39 +15,39 @@ MainViewPresenter class >> defaultSpec [
 add: #screen;
 add: (
 	SpBoxLayout newHorizontal
-		add: #buttonHappy;
-		add: #buttonNeutral;
-		add: #buttonBad; yourself);
+		add: #buttonContinue; yourself);
 	yourself
 ]
 
 { #category : #initialization }
 MainViewPresenter >> connectPresenters [ 
-buttonHappy action: [ screen label: buttonHappy  label ].
-buttonNeutral action: [ screen label: buttonNeutral label ].
-buttonBad action: [ screen label: buttonBad label ].
+buttonContinue action: [ story currentPage doContinue.
+	screen text: story currentPage currentText ].
 ]
 
 { #category : #initialization }
 MainViewPresenter >> initializePresenters [ 
-screen := self newLabel.
-buttonHappy := self newButton.
-buttonNeutral := self newButton.
-buttonBad := self newButton.
+screen := self newText.
+buttonContinue := self newButton.
 
-screen label: 'Start of the story'.
-buttonHappy label: 'Happy'; icon: (self iconNamed: #thumbsUp).
+screen text: 'Start of the story'.
+buttonContinue label: 'Continue'; icon: (self iconNamed: #thumbsUp).
 
-buttonNeutral label: 'Neutral'; icon: (self iconNamed: #user).
-
-buttonBad label: 'Bad'; icon: (self iconNamed: #thumbsDown).
-
-self focusOrder
-add: buttonHappy; add: buttonNeutral; add: buttonBad
 ]
 
 { #category : #initialization }
 MainViewPresenter >> initializeWindow: aWindowPresenter [
-aWindowPresenter title: 'Loca Deserta';
-initialExtent: 400@100
+aWindowPresenter title: story title;
+initialExtent: 800@600.
+screen text: story currentPage currentText
+]
+
+{ #category : #accessing }
+MainViewPresenter >> story [
+	^ story
+]
+
+{ #category : #accessing }
+MainViewPresenter >> story: anObject [
+	story := anObject
 ]
