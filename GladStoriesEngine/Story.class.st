@@ -58,6 +58,15 @@ Story >> description: anObject [
 	description := anObject
 ]
 
+{ #category : #'as yet unclassified' }
+Story >> goToNextPage: aOptionText [
+| nextPage |
+
+nextPage := (currentPage next select: [ :np | np text = aOptionText ]) at: 1.
+
+currentPage := nextPage nextPage 
+]
+
 { #category : #accessing }
 Story >> history [
 	^ history

@@ -52,6 +52,32 @@ self assert: p canContinue equals: false.
 ]
 
 { #category : #tests }
+PageTest >> testCurrentIndex [
+|p|
+
+p := Page new.
+self assert: p currentIndex equals: 1
+]
+
+{ #category : #tests }
+PageTest >> testCurrentNode [
+|p|
+
+p := Page new.
+p addNodeWithText: 'New text'.
+self assert: p currentNode text equals: 'New text'
+]
+
+{ #category : #tests }
+PageTest >> testCurrentText [
+|p|
+
+p := Page new.
+p addNodeWithText: 'New text'.
+self assert: p currentText equals: 'New text'
+]
+
+{ #category : #tests }
 PageTest >> testDoContinue [
 |p|
 
@@ -71,6 +97,22 @@ c := Page new.
 self assert: c currentIndex equals: 1.
 self assert: c nodes size equals: 0.
 self assert: c endType equals: nil.
+]
+
+{ #category : #tests }
+PageTest >> testFromMap [
+| m node |
+
+node := Dictionary new.
+node at: 'text' put: 'Text test'.
+m := Dictionary new.
+m at: 'nodes' put: {node}.
+m at: 'next' put: { }.
+m at: 'endType' put: 'DEAD'.
+
+self assert: (Page fromMap: m) currentIndex equals: 1.
+self assert: (Page fromMap: m) endType equals: 'DEAD'.
+
 ]
 
 { #category : #tests }
