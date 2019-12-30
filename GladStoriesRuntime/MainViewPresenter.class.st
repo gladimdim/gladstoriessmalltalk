@@ -4,33 +4,45 @@ Class {
 	#instVars : [
 		'buttonContinue',
 		'screen',
-		'story'
+		'story',
+		'buttonChoices'
 	],
 	#category : #GladStoriesRuntime
 }
 
 { #category : #specs }
 MainViewPresenter class >> defaultSpec [ 
-^ SpBoxLayout newVertical 
-add: #screen;
-add: (
-	SpBoxLayout newHorizontal
-		add: #buttonContinue; yourself);
-	yourself
+^ #mainLayout
 ]
 
 { #category : #initialization }
 MainViewPresenter >> connectPresenters [ 
-buttonContinue action: [ story currentPage doContinue.
-	screen text: story currentPage currentText ].
+| action choiceAction |
+choiceAction := [ :s :a :next |
+	s goToNextPage: next
+	].
+action:= [ story currentPage doContinue.
+	story currentPage canContinue
+	ifTrue: [ screen text: story currentPage currentText  ]
+	ifFalse: [
+		layout remove: buttonContinue.
+		story currentPage nextOptionsText do: [
+			:next | layout add: (self newButton label: next; action: [ story goToNextPage: next. Transcript show: story currentPage currentText  ] )
+			].
+		]
+	].
+
+buttonContinue action: action
 ]
 
 { #category : #initialization }
 MainViewPresenter >> initializePresenters [ 
 screen := self newText.
 buttonContinue := self newButton.
-
+layout := SpBoxLayout newVertical.
+layout add: screen; add: buttonContinue.
 screen text: 'Start of the story'.
+buttonChoices := SpBoxLayout newVertical.  
 buttonContinue label: 'Continue'; icon: (self iconNamed: #thumbsUp).
 
 ]
