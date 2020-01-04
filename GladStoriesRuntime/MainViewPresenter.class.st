@@ -5,7 +5,8 @@ Class {
 		'buttonContinue',
 		'screen',
 		'story',
-		'buttonChoices'
+		'buttonChoices',
+		'image'
 	],
 	#category : #GladStoriesRuntime
 }
@@ -25,6 +26,9 @@ buttonContinue action: [ story currentPage doContinue. self updateAfterChoice ]
 MainViewPresenter >> initializePresenters [ 
 screen := self newText.
 buttonContinue := self newButton.
+image := self newImage.
+image autoScale: true.
+image image: (ZnEasy getJpeg: 'https://locadeserta.com/game/assets/images/background/cossack_0.jpg').
 layout := SpBoxLayout newVertical.
 layout add: screen; add: buttonContinue.
 screen text: 'Start of the story'.
@@ -36,7 +40,7 @@ buttonContinue label: 'Continue'; icon: (self iconNamed: #forward).
 { #category : #initialization }
 MainViewPresenter >> initializeWindow: aWindowPresenter [
 aWindowPresenter title: story title;
-initialExtent: 800@600.
+initialExtent: 500@400.
 screen text: story currentPage currentText
 ]
 
@@ -55,6 +59,7 @@ MainViewPresenter >> updateAfterChoice [
 	screen text: story currentPage currentText.
 	layout removeAll.
 	layout add: screen.
+	story currentPage currentNode imageType ifNotNil: [image image: (ZnEasy getJpeg: (ImageResolver new stringToUrl: (story currentPage currentNode imageType))). layout add: image].
 	story currentPage canContinue
 		ifTrue: [
 			layout add: buttonContinue ]
