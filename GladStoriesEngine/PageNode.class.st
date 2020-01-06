@@ -30,6 +30,12 @@ PageNode >> imageType: anObject [
 ]
 
 { #category : #accessing }
+PageNode >> printOn: aStream [
+super printOn: aStream.
+aStream nextPutAll: ' with a text: ', text
+]
+
+{ #category : #accessing }
 PageNode >> text [
 	^ text
 ]
