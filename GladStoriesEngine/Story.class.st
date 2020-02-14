@@ -67,6 +67,11 @@ nextPage := (currentPage next select: [ :np | np text = aOptionText ]).
 currentPage := (nextPage at: 1) nextPage
 ]
 
+{ #category : #testing }
+Story >> hasTitle [ 
+^ (self title) notNil .
+]
+
 { #category : #accessing }
 Story >> history [
 	^ history
